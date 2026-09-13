@@ -95,6 +95,7 @@ function tampilkanListAkun() {
 }
 
 var keranjang = [];
+var riwayatTransaksi = [];
 var nomor = 1;
 var stokMaksimal = 100;
 
@@ -125,7 +126,7 @@ var hargaBarang = {
 	"Air Mineral": 4000
 };
 
-function simpanData() {
+function simpanData(tampilkanPesan) {
 	if (userAktif == "") {
 		return;
 	}
@@ -134,11 +135,14 @@ function simpanData() {
 		stokBarang: stokBarang,
 		kategoriBarang: kategoriBarang,
 		hargaBarang: hargaBarang
+		riwayatTransaksi: riwayatTransaksi
 	};
 
 	localStorage.setItem("kasirData_" + userAktif, JSON.stringify(data));
 
-	alert("Data berhasil disimpan untuk akun " + userAktif + "!");
+	if (tampilkanPesan !== false) {
+    alert("Data berhasil disimpan untuk akun " + userAktif + "!");
+	}
 }
 
 function muatData(username) {
@@ -153,6 +157,7 @@ function muatData(username) {
 	stokBarang = data.stokBarang;
 	kategoriBarang = data.kategoriBarang;
 	hargaBarang = data.hargaBarang;
+	riwayatTransaksi = data.riwayatTransaksi || [];
 
 	renderDropdownBarang();
 	tampilkanStok();
@@ -498,6 +503,21 @@ function konfirmasiBarcode() {
 }
 
 function selesaikanTransaksi(metode, totalBayar, kembalian, uangDibayar) {
+	 
+	var transaksi = {
+        nomor: riwayatTransaksi.length + 1,
+        tanggal: new Date().toLocaleString(),
+        barang: [...keranjang],
+        total: totalBayar,
+        metode: metode,
+        uangDibayar: uangDibayar,
+        kembalian: kembalian
+    };
+
+    riwayatTransaksi.push(transaksi);
+
+    simpanData(false);
+	
 	buatStruk(metode, totalBayar, kembalian, uangDibayar);
 
 	keranjang = [];
