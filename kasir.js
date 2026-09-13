@@ -349,7 +349,6 @@ function tampilkanStok() {
 		var nama = namaBarang[i];
 		var kategori = kategoriBarang[nama] || "Lainnya";
 
-		// kalau lagi filter kategori tertentu, skip yang beda kategori
 		if (filter != "semua" && filter != "az" && kategori != filter) {
 			continue;
 		}
