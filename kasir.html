@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Aplikasi Simple Kasir</title>
+<link rel="stylesheet" href="kasir.css">
+</head>
+<body>
+
+<div id="kotakLogin">
+	<h2>LOGIN KASIR</h2>
+	<input type="text" id="usernameLogin" placeholder="Username" onclick="tampilkanListAkun()" autocomplete="off"><br>
+	<input type="password" id="passwordLogin" placeholder="Password" onclick="tampilkanListAkun()" autocomplete="off"><br>
+	<div id="listAkunDropdown" style="display:none; border:1px solid black; text-align:left; max-height:100px; overflow:auto; margin-bottom:10px;"></div>
+	<button class="btn" onclick="cekLogin()">MASUK</button>
+
+	<hr>
+
+	<b>Belum Punya Akun?</b><br>
+	<input type="text" id="usernameBaru" placeholder="Username baru"><br>
+	<input type="password" id="passwordBaru" placeholder="Password baru"><br>
+	<button class="btn" onclick="daftarAkunBaru()">DAFTAR AKUN BARU</button>
+</div>
+
+<div id="appKasir" style="display:none;">
+
+<h1>SIMPLE KASIR TOKO ADIT</h1>
+
+<div style="text-align:right;">
+	<span id="labelUserAktif" style="font-weight:bold;"></span>
+	<button class="btn" onclick="simpanData()">SIMPAN DATA</button>
+	<button class="btn-hapus" onclick="keluarKasir()">KELUAR</button>
+</div>
+
+<hr>
+
+<label>Pilih Barang :</label>
+<select id="pilihBarang" onchange="cekBarangBaru()">
+	<option value="Indomie|3500">Indomie - 3500</option>
+	<option value="Beras 1kg|13000">Beras 1kg - 13000</option>
+	<option value="Minyak Goreng|18000">Minyak Goreng - 18000</option>
+	<option value="Telur 1kg|27000">Telur 1kg - 27000</option>
+	<option value="Gula 1kg|15000">Gula 1kg - 15000</option>
+	<option value="Air Mineral|4000">Air Mineral - 4000</option>
+	<option value="baru">+ Barang Baru</option>
+</select>
+
+<span id="formBarangBaruJual" style="display:none;">
+	<input type="text" id="namaBarangBaruJual" placeholder="Nama barang baru">
+	<input type="number" id="hargaBarangBaruJual" placeholder="Harga">
+	<select id="kategoriBarangBaruJual">
+		<option value="Makanan">Makanan</option>
+		<option value="Minuman">Minuman</option>
+		<option value="Lainnya">Lainnya</option>
+	</select>
+</span>
+
+<label>Jumlah :</label>
+<input type="number" id="jumlahBarang" value="1" min="1">
+
+<button class="btn" onclick="tambahBarang()">TAMBAH</button>
+
+<hr>
+
+<b>STOK BARANG (maksimal 100) :</b>
+<button class="btn" onclick="toggleStok()" id="tombolToggleStok">+</button>
+
+<div id="isiStok" style="display:none;">
+
+<label>Urutkan/Filter :</label>
+<select id="filterKategori" onchange="tampilkanStok()">
+	<option value="semua">Semua</option>
+	<option value="az">A-Z</option>
+	<option value="Makanan">Makanan</option>
+	<option value="Minuman">Minuman</option>
+	<option value="Lainnya">Lainnya</option>
+</select>
+
+<table id="tabelStok">
+	<tr>
+		<th>Nama Barang</th>
+		<th>Kategori</th>
+		<th>Sisa Stok</th>
+		<th>Atur Stok</th>
+	</tr>
+</table>
+
+</div>
+
+<hr>
+
+<table id="tabelKeranjang">
+	<tr>
+		<th>No</th>
+		<th>Nama Barang</th>
+		<th>Harga</th>
+		<th>Jumlah</th>
+		<th>Subtotal</th>
+		<th>Aksi</th>
+	</tr>
+</table>
+
+<br>
+
+<label>Diskon (%) :</label>
+<input type="number" id="diskonPersen" value="0" min="0" max="100" onchange="tampilkanKeranjang()">
+
+<br><br>
+
+<p>Subtotal : Rp <span id="subtotal">0</span></p>
+<p>Diskon : Rp <span id="potongan">0</span></p>
+<p>TOTAL BAYAR : Rp <span id="total">0</span></p>
+
+<label>Metode Pembayaran :</label>
+<select id="metodeBayar">
+	<option value="cash">Cash</option>
+	<option value="ewallet">E-Wallet</option>
+	<option value="va">Virtual Account</option>
+</select>
+
+<br><br>
+
+<button class="btn" onclick="bayar()">BAYAR</button>
+<button class="btn-hapus" onclick="resetKeranjang()">RESET</button>
+
+</div>
+
+<div class="overlay" id="modalBarcode">
+	<div class="kotakModal">
+		<h3 id="judulMetodeBarcode">E-WALLET</h3>
+		<p>Scan QR code di bawah ini buat bayar:</p>
+		<div id="qrcode"></div>
+		<p>Total : Rp <span id="totalBarcode">0</span></p>
+		<button class="btn" onclick="konfirmasiBarcode()">SUDAH BAYAR</button>
+		<button class="btn-hapus" onclick="batalBarcode()">BATAL</button>
+	</div>
+</div>
+
+<div class="overlay" id="modalStruk">
+	<div class="kotakModal">
+		<div id="isiStruk"></div>
+		<br>
+		<button class="btn" onclick="window.print()">CETAK STRUK</button>
+		<button class="btn-hapus" onclick="tutupStruk()">TUTUP</button>
+	</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="kasir.js"></script>
+
+</body>
+</html>

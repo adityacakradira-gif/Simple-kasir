@@ -1,0 +1,94 @@
+body {
+	background-color: #ccffcc;
+	font-family: Arial;
+}
+h1 {
+	color: blue;
+	text-align: center;
+}
+table {
+	border: 1px solid black;
+	width: 100%;
+	margin-top: 20px;
+}
+td, th {
+	border: 1px solid black;
+	padding: 5px;
+}
+.btn {
+	background-color: lightgreen;
+	border: 1px solid black;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+.btn-hapus {
+	background-color: red;
+	color: white;
+	border: 1px solid black;
+	padding: 3px 8px;
+	cursor: pointer;
+}
+#total {
+	font-size: 20px;
+	color: red;
+	font-weight: bold;
+}
+select, input {
+	padding: 5px;
+}
+#kotakLogin {
+	width: 300px;
+	margin: 100px auto;
+	border: 2px solid black;
+	padding: 20px;
+	text-align: center;
+}
+#kotakLogin input {
+	width: 90%;
+	margin-bottom: 10px;
+}
+.overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.6);
+	z-index: 100;
+}
+.kotakModal {
+	background-color: white;
+	width: 320px;
+	margin: 80px auto;
+	padding: 20px;
+	border: 2px solid black;
+	text-align: center;
+}
+#tabelStrukModal {
+	width: 100%;
+	margin-top: 10px;
+	font-size: 14px;
+}
+#tabelStrukModal td, #tabelStrukModal th {
+	padding: 3px;
+	border: 1px solid black;
+}
+#qrcode {
+	display: inline-block;
+	margin: 10px auto;
+}
+@media print {
+	body * {
+		visibility: hidden;
+	}
+	#isiStruk, #isiStruk * {
+		visibility: visible;
+	}
+	#isiStruk {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
+}
